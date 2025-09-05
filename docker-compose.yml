@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  presensi:
+    build: .
+    container_name: presensi_scanner
+    devices:
+      - "/dev/input/event5:/dev/input/event5"   # sesuaikan dengan device scanner
+    volumes:
+      - "./logs:/logs"
+    restart: always
