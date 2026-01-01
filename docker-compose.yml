@@ -4,8 +4,11 @@ services:
   presensi:
     build: .
     container_name: presensi_scanner
-    devices:
-      - "/dev/input/event5:/dev/input/event5"   # sesuaikan dengan device scanner
+    # 1. Gunakan privileged agar container punya izin akses hardware penuh
+    privileged: true 
+    # 2. Mount seluruh folder input, bukan satu file event saja
     volumes:
+      - "/dev/input:/dev/input"
       - "./logs:/logs"
+    # 3. Tetap gunakan restart: always agar otomatis nyala saat boot
     restart: always
